@@ -3,12 +3,30 @@
 *::after {
   box-sizing: border-box;
 }
+:root{
+  --default-gradient: linear-gradient(transparent 30%, #f7f5fa 70%);
+  --default-color : rgba(39, 3, 3, 0.712);
+  --default-change: #fff;
+  --default-backgroundUrl: url('https://res.cloudinary.com/soares04/image/upload/v1652278164/bl9qgze3ct0rippnxube.jpg')
+}
 
+.dark-mode{
+  --default-gradient: linear-gradient(transparent 30%, #0a060f 70%);
+  --default-color : #fff;
+  --default-change: rgb(7, 6, 6);
+  --default-backgroundUrl: url('https://res.cloudinary.com/soares04/image/upload/v1652278164/jbrkb7wdjdrbqjm8qlq0.jpg')
+
+}
 html {
   font: 62.5% / 1.15 sans-serif;
 }
 h1 {
-  color: #fff
+  color: var(--default-change);
+  display: block;
+  max-width: 100%;
+  letter-spacing: .9rem;
+  margin: 0;
+  margin-bottom: 1rem;
 }
 h2{
   font-size:1em;
@@ -61,7 +79,8 @@ body {
   max-width: 68rem;
   margin: 0 auto;
   font: 1.6rem/1.25 Arial, sans-serif;
-  background-image:linear-gradient(to bottom, transparent 30%, #f7f5fa 70%), url('https://res.cloudinary.com/soares04/image/upload/v1652278164/bl9qgze3ct0rippnxube.jpg');
+  background-image: var(--default-backgroundUrl);
+  background-color: var(--default-change);
   background-repeat: no-repeat;
   color: #4d4d4d;
   height: 100vh;
@@ -83,13 +102,15 @@ body {
   cursor: pointer;
   text-transform: capitalize;
   float: right;
+  color: var(--default-color)
 }
+.btn:hover {color:rgb(37, 37, 250)}
 .btn.toggle-btn {
   border-width: 1px;
   border-color: #d3d3d3;
 }
 .btn.toggle-btn[aria-pressed="true"] {
-  text-decoration: underline;
+  text-decoration: none;
   border-color: #4d4d4d;
 }
 .btn__danger {
@@ -168,7 +189,8 @@ body {
   max-width: 100%;
 }
 .todolist-container {
-  background-color: white;
+  background-color : var(--default-change);
+  color: rgb(167, 164, 164);
   margin-top: 0.1rem;
   border-radius: 0.25rem;
   padding: 0.5rem;
@@ -180,13 +202,6 @@ body {
   height: 90%;
 }
 
-.todoapp > h1 {
-  display: block;
-  max-width: 100%;
-  letter-spacing: .9rem;
-  margin: 0;
-  margin-bottom: 1rem;
-}
 .label__lg {
   line-height: 1.01567;
   font-weight: 300;
@@ -316,3 +331,4 @@ body {
 .c-cb > input[type="checkbox"]:checked + label::after {
   opacity: 1;
 }
+

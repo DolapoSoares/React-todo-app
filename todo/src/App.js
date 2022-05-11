@@ -3,6 +3,7 @@ import Todo from './components/Todo'
 import Form from "./components/Form";
 import Footer from "./components/Footer"
 import FilterButton from './components/FilterButton';
+import Header from './components/Header'
 import { nanoid } from "nanoid";
 
 const FILTER_MAP = {
@@ -69,7 +70,7 @@ function App() {
 
   return (
     <div className="todoapp stack-large">
-    <h1>TODO</h1>
+    <Header />
     <Form addTask={addTask} />
     <div className="filters btn-group stack-exception">
     <ul
