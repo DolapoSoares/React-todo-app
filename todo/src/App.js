@@ -1,5 +1,15 @@
-import React from 'react'
+import React , { useState } from 'react'
 import Todo from './components/Todo'
+import Form from "./components/Form";
+import FilterButton from "./components/FilterButton";
+import { nanoid } from "nanoid";
+
+const FILTER_MAP = {
+  All: () => true,
+  Active: task => !task.completed,
+  Completed: task => task.completed
+};
+const FILTER_NAMES = Object.keys(FILTER_MAP);
 
 function App() {
 
@@ -9,29 +19,53 @@ function App() {
     { id: "todo3", name: "Repeat", completed: false }
   ];
 
-  const taskList = data.map(task => (
+  const [tasks, setData] = useState(data);
+  const [filter, setFilter] = useState('All');
+
+  function toggleTaskCompleted(id) {
+    const updatedTasks = tasks.map(task => {
+      if (id === task.id) {
+        return {...task, completed: !task.completed}
+      }
+      return task;
+    });
+    setData(updatedTasks)
+  }
+
+  function deleteTask(id) {
+    const remainingTasks = tasks.filter(task => id !== task.id);
+    setData(remainingTasks)
+  }
+
+  const taskList = tasks.filter(FILTER_MAP[filter]).map(task => (
     <Todo
       id={task.id}
       name={task.name}
       completed={task.completed}
       key={task.id}
+      toggleTaskCompleted={toggleTaskCompleted}
+      deleteTask={deleteTask}
     />
    ))
+   const filterList = FILTER_NAMES.map(name => (
+    <FilterButton
+     key={name} 
+     name={name}
+     setFilter={setFilter}
+     />
+  ));
+  const tasksNoun = taskList.length !== 1 ? 'tasks' : 'task';
+  const headingText = `${taskList.length} ${tasksNoun} remaining`;
+
+   function addTask(name) {
+    const newTask = { id: "todo" + nanoid(), name: name, completed: false };
+    setData([...tasks, newTask]);
+  }
+
   return (
     <div className="todoapp stack-large">
     <h1>Todo</h1>
-    <form>
-      <input
-        type="text"
-        id="new-todo-input"
-        className="input input__lg"
-        name="text"
-        autoComplete="off"
-      />
-      <button type="submit" className="btn btn__primary btn__lg">
-        Add
-      </button>
-    </form>
+    <Form addTask={addTask} />
     <div className="filters btn-group stack-exception">
     <ul
       role="list"
@@ -40,22 +74,13 @@ function App() {
     >
     {taskList}
     </ul>
-    <button type="button" className="btn toggle-btn" aria-pressed="true">
-        <span>All</span>
-      </button>
-      <button type="button" className="btn toggle-btn" aria-pressed="false">
-        <span>Active</span>
-      </button>
-      <button type="button" className="btn toggle-btn" aria-pressed="false">
-        <span>Completed</span>
-      </button>
-      <button type="button" className="btn toggle-btn" aria-pressed="false">
-        <span>Clear Completed</span>
-      </button>
-    </div>
+       <div className="filters btn-group stack-exception">
+        {filterList}
+      </div>
     <h2 id="list-heading">
-      3 tasks remaining
+      {headingText}
     </h2>
+  </div>
   </div>
   )
 }
