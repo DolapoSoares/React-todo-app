@@ -24,6 +24,7 @@ function App() {
   const [tasks, setData] = useState(data);
   const [filter, setFilter] = useState('All');
 
+  console.log(tasks)
 
   function toggleTaskCompleted(id) {
     const updatedTasks = tasks.map(task => {
@@ -38,6 +39,11 @@ function App() {
   function deleteTask(id) {
     const remainingTasks = tasks.filter(task => id !== task.id);
     setData(remainingTasks)
+  }
+
+  function deleteTaskCompleted() {
+    const completedValue = tasks.filter(task => task.completed === false);
+    setData(completedValue);
   }
 
   const taskList = tasks.filter(FILTER_MAP[filter]).map(task => (
@@ -81,7 +87,7 @@ function App() {
     {taskList}
     </ul>
     </div>
-    <Footer setFilter={setFilter} headingText={headingText} filterList={filterList}/>
+    <Footer setFilter={setFilter} headingText={headingText} filterList={filterList} deleteTaskCompleted={deleteTaskCompleted} tasks={tasks}/>
      </div>
   )
 }

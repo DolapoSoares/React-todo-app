@@ -1,5 +1,5 @@
 import React , { useState } from 'react'
-import { BsFillSunFill , BsMoon } from 'react-icons/bs'
+import { BsSun , BsFillMoonFill } from 'react-icons/bs'
 
 function Header() {
 
@@ -13,11 +13,12 @@ function Header() {
   return (
     <div>
         <div>
-        <h1>TODO</h1>
+       
         
-            {!isLight && <BsFillSunFill className="sun fillsun" onClick={setLightMode} />}
-            {isLight && <BsMoon className="sun fill
+            {!isLight && <BsSun className="sun fillsun" onClick={setLightMode} />}
+            {isLight && <BsFillMoonFill className="sun fill
             moon" onClick={setLightMode} />}
+             <h1>TODO</h1>
         </div>
     </div>
     

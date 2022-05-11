@@ -2,16 +2,16 @@ import React from 'react'
 import CloseCompleted from './CloseCompleted';
 
 
-function Footer(props) {
+function Footer({ deleteTaskCompleted, headingText, filterList}) {
 
   return (
     <div>
       <div className="filters btn-group stack-exception">
       <h2 id="list-heading">
-            {props.headingText}
+            {headingText}
         </h2>
-          {props.filterList}
-          <CloseCompleted />
+          {filterList}
+          <CloseCompleted deleteTaskCompleted={deleteTaskCompleted}/>
       </div>
       
     </div>

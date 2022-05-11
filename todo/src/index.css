@@ -5,13 +5,15 @@
 }
 :root{
   --default-gradient: linear-gradient(transparent 30%, #f7f5fa 70%);
-  --default-color : rgba(39, 3, 3, 0.712);
+  --default-color : rgba(14, 8, 8, 0.712);
   --default-change: #fff;
+  --default-tune: #fff;
   --default-backgroundUrl: url('https://res.cloudinary.com/soares04/image/upload/v1652278164/bl9qgze3ct0rippnxube.jpg')
 }
 
 .dark-mode{
   --default-gradient: linear-gradient(transparent 30%, #0a060f 70%);
+  --default-tune: rgb(17, 16, 16);
   --default-color : #fff;
   --default-change: rgb(7, 6, 6);
   --default-backgroundUrl: url('https://res.cloudinary.com/soares04/image/upload/v1652278164/jbrkb7wdjdrbqjm8qlq0.jpg')
@@ -189,7 +191,7 @@ body {
   max-width: 100%;
 }
 .todolist-container {
-  background-color : var(--default-change);
+  background-color : var(--default-tune);
   color: rgb(167, 164, 164);
   margin-top: 0.1rem;
   border-radius: 0.25rem;
@@ -331,4 +333,8 @@ body {
 .c-cb > input[type="checkbox"]:checked + label::after {
   opacity: 1;
 }
-
+.sun{
+  float: right;
+  margin-top: 1em;
+  color: var(--default-color)
+}
