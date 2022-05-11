@@ -15,8 +15,6 @@ function Form(props) {
     }
     return (
       <form onSubmit={handleSubmit}>
-        <h2 className="label-wrapper">
-        </h2>
         <input
           type="text"
           id="new-todo-input"
