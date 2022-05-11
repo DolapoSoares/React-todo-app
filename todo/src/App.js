@@ -1,8 +1,8 @@
 import React , { useState } from 'react'
 import Todo from './components/Todo'
 import Form from "./components/Form";
-import FilterButton from "./components/FilterButton";
-import CloseCompleted from './components/CloseCompleted'
+import Footer from "./components/Footer"
+import FilterButton from './components/FilterButton';
 import { nanoid } from "nanoid";
 
 const FILTER_MAP = {
@@ -38,10 +38,7 @@ function App() {
     const remainingTasks = tasks.filter(task => id !== task.id);
     setData(remainingTasks)
   }
-  function deleteAllCompletedTask(tasks) {
-    const completedTasks = tasks.filter(task => true === task.completed);
-    setData(completedTasks)
-  }
+
   const taskList = tasks.filter(FILTER_MAP[filter]).map(task => (
     <Todo
       id={task.id}
@@ -56,9 +53,12 @@ function App() {
     <FilterButton
      key={name} 
      name={name}
+     isPressed={name === filter}
      setFilter={setFilter}
      />
   ));
+   
+
   const tasksNoun = taskList.length !== 1 ? 'tasks' : 'task';
   const headingText = `${taskList.length} ${tasksNoun} remaining`;
 
@@ -69,7 +69,7 @@ function App() {
 
   return (
     <div className="todoapp stack-large">
-    <h1>Todo</h1>
+    <h1>TODO</h1>
     <Form addTask={addTask} />
     <div className="filters btn-group stack-exception">
     <ul
@@ -79,14 +79,8 @@ function App() {
     >
     {taskList}
     </ul>
-       <div className="filters btn-group stack-exception">
-        {filterList}
-        <CloseCompleted deleteAllCompletedTask={deleteAllCompletedTask}/>
-      </div>
-    <h2 id="list-heading">
-      {headingText}
-    </h2>
     </div>
+    <Footer setFilter={setFilter} headingText={headingText} filterList={filterList}/>
      </div>
   )
 }
